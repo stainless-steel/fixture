@@ -1,6 +1,7 @@
 use std::fs;
 use std::path::{Path, PathBuf};
 
+/// Look for the first file satisfying a condition.
 pub fn first<F>(path: &Path, condition: F) -> Option<PathBuf> where F: Fn(&Path) -> bool {
     macro_rules! ok(
         ($result:expr) => (
@@ -28,6 +29,7 @@ pub fn first<F>(path: &Path, condition: F) -> Option<PathBuf> where F: Fn(&Path)
     None
 }
 
+/// Look for the first file with a particular extension.
 pub fn extension(path: &Path, extension: &str) -> Option<PathBuf> {
     use std::ascii::AsciiExt;
 
