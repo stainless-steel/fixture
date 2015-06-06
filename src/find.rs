@@ -1,6 +1,15 @@
 use std::fs;
 use std::path::{Path, PathBuf};
 
+macro_rules! some(
+    ($option:expr) => (
+        match $option {
+            Some(some) => some,
+            None => return false,
+        }
+    );
+);
+
 /// A decision with respect to a file.
 pub enum Verdict {
     /// Accept and keep searching.
@@ -20,6 +29,14 @@ pub fn all<F>(directory: &Path, condition: F) -> Vec<PathBuf> where F: Fn(&Path)
     })
 }
 
+/// Look for all files with a particular extension.
+pub fn all_with_extension(directory: &Path, extension: &str) -> Vec<PathBuf> {
+    use std::ascii::AsciiExt;
+    all(directory, |path| -> bool {
+        some!(some!(path.extension()).to_str()).to_ascii_lowercase() == extension
+    })
+}
+
 /// Look for the first file satisfying a condition.
 pub fn first<F>(directory: &Path, condition: F) -> Option<PathBuf> where F: Fn(&Path) -> bool {
     some(directory, |path| {
@@ -30,18 +47,8 @@ pub fn first<F>(directory: &Path, condition: F) -> Option<PathBuf> where F: Fn(&
 /// Look for the first file with a particular extension.
 pub fn first_with_extension(directory: &Path, extension: &str) -> Option<PathBuf> {
     use std::ascii::AsciiExt;
-
-    macro_rules! ok(
-        ($option:expr) => (
-            match $option {
-                Some(some) => some,
-                None => return false,
-            }
-        );
-    );
-
     first(directory, |path| -> bool {
-        ok!(ok!(path.extension()).to_str()).to_ascii_lowercase() == extension
+        some!(some!(path.extension()).to_str()).to_ascii_lowercase() == extension
     })
 }
 
