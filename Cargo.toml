@@ -1,9 +1,9 @@
 [package]
 name = "fixture"
-version = "0.2.0"
+version = "0.3.0"
+license = "Apache-2.0/MIT"
 authors = ["Ivan Ukhov <ivan.ukhov@gmail.com>"]
-license = "MIT"
-repository = "https://github.com/stainless-steel/fixture"
-homepage = "https://github.com/stainless-steel/fixture"
-documentation = "https://stainless-steel.github.io/fixture"
 description = "The package provides auxiliary routines for testing."
+documentation = "https://stainless-steel.github.io/fixture"
+homepage = "https://github.com/stainless-steel/fixture"
+repository = "https://github.com/stainless-steel/fixture"
