@@ -1,3 +1,5 @@
+//! Routines for copying.
+
 use std::fs;
 use std::path::{Path, PathBuf};
 use std::io::{Error, ErrorKind, Result};

@@ -1,3 +1,5 @@
+//! Routines for searching.
+
 use std::fs;
 use std::path::{Path, PathBuf};
 
